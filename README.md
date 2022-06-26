@@ -11,7 +11,8 @@
 ### 2-1概述:
     在商品硬件上运行的分布式文件系统,具有高度的容错能力,高通吐量访问,实现流式访问
 ### 2-2相关概念:
-    NameNode:  文件名,存储元数据,元数据存在内存中,block与datanode的映射关系(唯一性)  
+    NameNode:  文件名,存储元数据,元数据存在内存中,block与datanode的映射关系(唯一性)
+               =Editlog(对元数据的修改信息)+Fsimage(文件系统数,文件夹,文件元数据信息)
     DataNode:  数据节点,存储文件内容,文件内容保存在磁盘,block id与datanode与本地文件的映射关系
     Client:  客户端,主要包含HDFS的一些接口,用于访问HDFS上的文件
 #### Block-块:
@@ -31,8 +32,9 @@
     3.隔离问题:由于集群中只有一个名称节点,只有一个命名空间,因此,无法对不同应用程序进行隔离
     4.集群的可用性:一旦这个唯一的名称节点发生故障,会导致整个集群变得不可用
 ### 2-4 关键特性介绍:
-    ()HA)高可用性,双节点:NameNode(active)主节点,NameNode(stand by)二备份节点
+#### 高可用性(HA):
+    双节点:NameNode(active)主节点,NameNode(stand by)二备份节点
     ![](https://user-images.githubusercontent.com/81810940/175806673-e8c7e6c0-83df-45de-8481-ecb9c20884f5.png)
-
+#### 元数据持久化:
     
     
