@@ -36,5 +36,10 @@
     双节点:NameNode(active)主节点,NameNode(stand by)二备份节点
     ![](https://user-images.githubusercontent.com/81810940/175806673-e8c7e6c0-83df-45de-8481-ecb9c20884f5.png)
 #### 元数据持久化:
+    SecondaryNamenode.
+    ![](https://user-images.githubusercontent.com/81810940/175807053-f2103f4c-14df-450c-a8f9-799514dbdf99.png)
+#### HDFS联邦:
+
+
     
     
