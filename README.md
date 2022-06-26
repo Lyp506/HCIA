@@ -34,12 +34,21 @@
 ### 2-4 关键特性介绍:
 #### 高可用性(HA):
     双节点:NameNode(active)主节点,NameNode(stand by)二备份节点
+    ![image](https://user-images.githubusercontent.com/81810940/175807308-895b2245-cec4-44d7-b0cc-e242baf3a785.png)
+    同时运行两个Namenode，一个作为活动的Namenode（Active），一个作为备份的Namenode（Standby）。备份的Namenode的命名空间与活动的Namenode是实时同步的，所以当活动的Namenode发生故障而停止服务时，备份Namenode可以立即切换为活动状态，而不影响HDFS集群服务。
     ![](https://user-images.githubusercontent.com/81810940/175806673-e8c7e6c0-83df-45de-8481-ecb9c20884f5.png)
 #### 元数据持久化:
     SecondaryNamenode.
     ![](https://user-images.githubusercontent.com/81810940/175807053-f2103f4c-14df-450c-a8f9-799514dbdf99.png)
-#### HDFS联邦:
-
+    1、主namenode接收文件系统操作请求，生成editlog，并回滚日志，向editlog.new中记录日子
+    2、备用namenode从主namenode上下载FSImage，并从共享存储中读取editlog
+    3、备用namenode将日志和旧的元数据合并，生成新的元数据FSImage.ckpt
+    4、备用namenode将元数据上传到主用namenode
+    5、主namenode将上传的元数据进行回滚
+    6、循环操作
+#### HDFS联邦(Federation):
+    ![image](https://user-images.githubusercontent.com/81810940/175807405-697bf7b2-5407-4e5d-9a60-79ff466894fe.png)
+    
 
     
     
