@@ -34,7 +34,7 @@
 ### 2-4 关键特性介绍:
 #### 高可用性(HA):
     双节点:NameNode(active)主节点,NameNode(stand by)二备份节点
-    ![image](https://user-images.githubusercontent.com/81810940/175807308-895b2245-cec4-44d7-b0cc-e242baf3a785.png)
+    ![](https://user-images.githubusercontent.com/81810940/175807308-895b2245-cec4-44d7-b0cc-e242baf3a785.png)
     同时运行两个Namenode，一个作为活动的Namenode（Active），一个作为备份的Namenode（Standby）。备份的Namenode的命名空间与活动的Namenode是实时同步的，所以当活动的Namenode发生故障而停止服务时，备份Namenode可以立即切换为活动状态，而不影响HDFS集群服务。
     ![](https://user-images.githubusercontent.com/81810940/175806673-e8c7e6c0-83df-45de-8481-ecb9c20884f5.png)
 #### 元数据持久化:
