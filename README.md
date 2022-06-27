@@ -48,7 +48,12 @@
     6、循环操作
 #### HDFS联邦(Federation):
     ![image](https://user-images.githubusercontent.com/81810940/175807405-697bf7b2-5407-4e5d-9a60-79ff466894fe.png)
-    
+    Federation使用多组独立的Namenodes/Namespaces。所有的Namenodes是联邦的，也就是说，他们之间相互独立且不需要互相协调，各自分工，管理自己的区域。Datanode被用作通用的数据块存储设备，每个DataNode要向集群中所有的Namenode注册，且周期性的向所有Namenode发送心跳和块报告，并执行来自所有Namenode的命令。
+    1.这些namenode直接相互独立，各自分工管理自己的区域，且不需要互相协调，一个namenode挂掉了不会影响其他的namenode
+    2.datanode被用作通用的数据存储设备，每个datanode要向集群中所有的namenode注册，且周期性的向所有namenode发送心跳和报告，并执行来自所有namenode的命令
+    3.一个block pool由属于同一个namespace的数据块组成，每个datanode可能会存储集群中所有block pool 数据块每个block pool内部自治，各自管理各自的block，不会与其他block pool交流
+    4.namenode和block pool一起被称作namespace volume，它是管理的基本单位，当一个namespace被删除后，所有datanode上与其对应的block pool也会被删除。当集群升级时，每个namespace volume作为一个基本单元进行升级
+
 
     
     
