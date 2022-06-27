@@ -35,6 +35,8 @@
 #### 高可用性(HA):
     双节点:NameNode(active)主节点,NameNode(stand by)二备份节点
     ![](https://user-images.githubusercontent.com/81810940/175807308-895b2245-cec4-44d7-b0cc-e242baf3a785.png)
+    ![image](https://user-images.githubusercontent.com/81810940/175872240-07b3d128-410b-4564-88d0-a0f381b3b9cb.png)
+
     同时运行两个Namenode，一个作为活动的Namenode（Active），一个作为备份的Namenode（Standby）。备份的Namenode的命名空间与活动的Namenode是实时同步的，所以当活动的Namenode发生故障而停止服务时，备份Namenode可以立即切换为活动状态，而不影响HDFS集群服务。
     ![](https://user-images.githubusercontent.com/81810940/175806673-e8c7e6c0-83df-45de-8481-ecb9c20884f5.png)
 #### 元数据持久化:
@@ -47,12 +49,15 @@
     5、主namenode将上传的元数据进行回滚
     6、循环操作
 #### HDFS联邦(Federation):
+##### 图像:
     ![image](https://user-images.githubusercontent.com/81810940/175807405-697bf7b2-5407-4e5d-9a60-79ff466894fe.png)
+##### 解释:
     Federation使用多组独立的Namenodes/Namespaces。所有的Namenodes是联邦的，也就是说，他们之间相互独立且不需要互相协调，各自分工，管理自己的区域。Datanode被用作通用的数据块存储设备，每个DataNode要向集群中所有的Namenode注册，且周期性的向所有Namenode发送心跳和块报告，并执行来自所有Namenode的命令。
     1.这些namenode直接相互独立，各自分工管理自己的区域，且不需要互相协调，一个namenode挂掉了不会影响其他的namenode
     2.datanode被用作通用的数据存储设备，每个datanode要向集群中所有的namenode注册，且周期性的向所有namenode发送心跳和报告，并执行来自所有namenode的命令
     3.一个block pool由属于同一个namespace的数据块组成，每个datanode可能会存储集群中所有block pool 数据块每个block pool内部自治，各自管理各自的block，不会与其他block pool交流
     4.namenode和block pool一起被称作namespace volume，它是管理的基本单位，当一个namespace被删除后，所有datanode上与其对应的block pool也会被删除。当集群升级时，每个namespace volume作为一个基本单元进行升级
+    
 
 
     
